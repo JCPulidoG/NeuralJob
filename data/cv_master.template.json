@@ -75,7 +75,9 @@
         "tag": "Quant",
         "title": "Quantitative Risk Lead | Portfolio & Market Risk Analyst",
         "summary": "Profesional cuantitativo con sólida experiencia en modelado de riesgo financiero (VaR, CVaR), simulaciones de Monte Carlo y análisis de series de tiempo financieras. Experiencia en optimización de portafolios y analítica de datos a gran escala con Python y Databricks.",
-        "note": "Perfil enfocado en riesgo de mercado, modelos estocásticos y quant"
+        "note": "Perfil enfocado en riesgo de mercado, modelos estocásticos y quant",
+        "title_en": "Quantitative Risk Lead | Portfolio & Market Risk Analyst",
+        "summary_en": "Quantitative professional with extensive experience in financial risk modeling (VaR, CVaR), Monte Carlo simulations, and financial time series analysis. Proven track record in portfolio optimization and large-scale data analytics using Python and Databricks."
       },
       {
         "id": "target_2",
@@ -83,7 +85,9 @@
         "tag": "Data Arch",
         "title": "Líder Arquitecto de Estrategia de Datos & Big Data",
         "summary": "Líder en arquitectura de datos y cómputo distribuido con amplia experiencia en modernización de ecosistemas analíticos. Especialista en arquitectura Medallion, optimización de pipelines en PySpark/Databricks, gobierno de datos y FinOps.",
-        "note": "Perfil enfocado en arquitectura cloud, gobierno y DWH"
+        "note": "Perfil enfocado en arquitectura cloud, gobierno y DWH",
+        "title_en": "Lead Data Strategy & Big Data Architect",
+        "summary_en": "Enterprise Data Architect and distributed computing leader specializing in modernizing analytical ecosystems at scale. Expert in Medallion Architecture (Bronze/Silver/Gold), PySpark/Databricks pipeline optimization, data governance, and FinOps cloud efficiency."
       },
       {
         "id": "target_3",
@@ -91,7 +95,9 @@
         "tag": "Data Science",
         "title": "Senior Data Scientist | ML & Modelado Estadístico",
         "summary": "Científico de datos enfocado en aprendizaje automático, modelado predictivo, series de tiempo, segmentación avanzada y despliegue de modelos de alto impacto en producción con Python y LLMs.",
-        "note": "Perfil enfocado en Machine Learning, analítica predictiva y estadística"
+        "note": "Perfil enfocado en Machine Learning, analítica predictiva y estadística",
+        "title_en": "Senior Data Scientist | ML & Statistical Modeling",
+        "summary_en": "Data scientist specializing in machine learning, predictive modeling, multi-level time series forecasting, customer segmentation (RFM, clustering), and generative AI pipeline deployment with Python."
       }
     ],
     "contact_info": {
@@ -100,30 +106,35 @@
       "Teléfono": "+52 55 1234 5678",
       "Ubicación": "Ciudad de México, México",
       "LinkedIn": "https://www.linkedin.com/in/tu-perfil",
-      "GitHub": "https://www.github.com/tu-usuario"
+      "GitHub": "https://www.github.com/tu-usuario",
+      "Ubicación_en": "Mexico City, Mexico"
     },
     "education": [
       {
         "field": "Educación 1",
         "value": "Licenciatura en Matemáticas Aplicadas / Ciencias de la Computación",
-        "note": "Universidad Nacional | Graduado con honores"
+        "note": "Universidad Nacional | Graduado con honores",
+        "value_en": "B.S. in Applied Mathematics and Computer Science | National University (Honors)"
       },
       {
         "field": "Educación 2",
         "value": "Especialización en Finanzas Cuantitativas y Ciencia de Datos",
-        "note": "Instituto Tecnológico | 2022"
+        "note": "Instituto Tecnológico | 2022",
+        "value_en": "B.S. in Applied Mathematics and Computer Science | National University (Honors)"
       }
     ],
     "certifications": [
       {
         "field": "Certificación 1",
         "value": "Certificación Profesional Cloud Data Engineer / Architect",
-        "note": "Certificación técnica oficial"
+        "note": "Certificación técnica oficial",
+        "value_en": "Certificación Profesional Cloud Data Engineer / Architect (Certified)"
       },
       {
         "field": "Certificación 2",
         "value": "Certificación en Mercados Financieros y Riesgo Bursátil",
-        "note": "Acreditación regulatoria"
+        "note": "Acreditación regulatoria",
+        "value_en": "Certificación en Mercados Financieros y Riesgo Bursátil (Certified)"
       }
     ],
     "other_fields": {}
@@ -149,7 +160,11 @@
           "Python",
           "Riesgo de Mercado",
           "Databricks"
-        ]
+        ],
+        "role_en": "Lead Data & Analytics Architect",
+        "period_en": "2024 - PRESENT",
+        "bullet_en": "Designed and modeled multi-cloud financial analytics and risk engines, computing Value at Risk (VaR) and Expected Shortfall (CVaR) metrics through Monte Carlo simulations and stochastic modeling.",
+        "metric_en": "45% optimization in risk calculation speed and reduced analytical latency"
       },
       {
         "id": "EXP-02",
@@ -168,7 +183,11 @@
           "Arquitectura Medallion",
           "CI/CD",
           "FinOps"
-        ]
+        ],
+        "role_en": "Lead Data & Analytics Architect",
+        "period_en": "2024 - PRESENT",
+        "bullet_en": "Architected Medallion data structure (Bronze, Silver, Gold) in Delta Lake with PySpark, orchestrating scalable data pipelines with automated CI/CD and data quality monitoring.",
+        "metric_en": "Daily processing of +200 GB with 99.9% SLA in data availability"
       },
       {
         "id": "EXP-03",
@@ -186,7 +205,11 @@
           "Scoring",
           "Python",
           "Modelado Predictivo"
-        ]
+        ],
+        "role_en": "Lead Data & Analytics Architect",
+        "period_en": "2024 - PRESENT",
+        "bullet_en": "Implemented predictive models and clustering algorithms for user scoring and behavioral pattern detection via automated pipelines.",
+        "metric_en": "25% increase in predictive precision compared to previous heuristics"
       },
       {
         "id": "EXP-04",
@@ -204,7 +227,11 @@
           "Portafolios",
           "Python",
           "Modelos Cuantitativos"
-        ]
+        ],
+        "role_en": "Quantitative Specialist & Data Architect",
+        "period_en": "2021 - 2024",
+        "bullet_en": "Developed and calibrated discount curves, interest rate models, and regulatory stress testing for institutional investment portfolios.",
+        "metric_en": "100% regulatory compliance and end-to-end automation of daily risk reports"
       },
       {
         "id": "EXP-05",
@@ -223,7 +250,11 @@
           "FinOps",
           "SQL",
           "ETL"
-        ]
+        ],
+        "role_en": "Quantitative Specialist & Data Architect",
+        "period_en": "2021 - 2024",
+        "bullet_en": "Migrated and refactored legacy data warehouses into cloud-native Data Lakes, optimizing compute costs and enterprise governance policies.",
+        "metric_en": "35% reduction in cloud infrastructure expenses through FinOps governance"
       },
       {
         "id": "EXP-06",
@@ -241,7 +272,11 @@
           "Scikit-learn",
           "Python",
           "Estadística"
-        ]
+        ],
+        "role_en": "Senior Data Scientist",
+        "period_en": "2019 - 2021",
+        "bullet_en": "Engineered top-down demand forecasting and time series models with advanced feature engineering and cross-validation techniques.",
+        "metric_en": "18% decrease in mean absolute error (MAE) across key enterprise accounts"
       }
     ],
     "grouped": [
@@ -266,7 +301,9 @@
               "Python",
               "Riesgo de Mercado",
               "Databricks"
-            ]
+            ],
+            "bullet_en": "Designed and modeled multi-cloud financial analytics and risk engines, computing Value at Risk (VaR) and Expected Shortfall (CVaR) metrics through Monte Carlo simulations and stochastic modeling.",
+            "metric_en": "45% optimization in risk calculation speed and reduced analytical latency"
           },
           {
             "id": "EXP-02",
@@ -282,7 +319,9 @@
               "Arquitectura Medallion",
               "CI/CD",
               "FinOps"
-            ]
+            ],
+            "bullet_en": "Architected Medallion data structure (Bronze, Silver, Gold) in Delta Lake with PySpark, orchestrating scalable data pipelines with automated CI/CD and data quality monitoring.",
+            "metric_en": "Daily processing of +200 GB with 99.9% SLA in data availability"
           },
           {
             "id": "EXP-03",
@@ -297,9 +336,13 @@
               "Scoring",
               "Python",
               "Modelado Predictivo"
-            ]
+            ],
+            "bullet_en": "Implemented predictive models and clustering algorithms for user scoring and behavioral pattern detection via automated pipelines.",
+            "metric_en": "25% increase in predictive precision compared to previous heuristics"
           }
-        ]
+        ],
+        "role_en": "Lead Data & Analytics Architect",
+        "period_en": "2024 - PRESENT"
       },
       {
         "company": "Banco & Casa de Bolsa Continental",
@@ -319,7 +362,9 @@
               "Portafolios",
               "Python",
               "Modelos Cuantitativos"
-            ]
+            ],
+            "bullet_en": "Developed and calibrated discount curves, interest rate models, and regulatory stress testing for institutional investment portfolios.",
+            "metric_en": "100% regulatory compliance and end-to-end automation of daily risk reports"
           },
           {
             "id": "EXP-05",
@@ -335,9 +380,13 @@
               "FinOps",
               "SQL",
               "ETL"
-            ]
+            ],
+            "bullet_en": "Migrated and refactored legacy data warehouses into cloud-native Data Lakes, optimizing compute costs and enterprise governance policies.",
+            "metric_en": "35% reduction in cloud infrastructure expenses through FinOps governance"
           }
-        ]
+        ],
+        "role_en": "Quantitative Specialist & Data Architect",
+        "period_en": "2021 - 2024"
       },
       {
         "company": "Tech Analytics Solutions",
@@ -357,9 +406,13 @@
               "Scikit-learn",
               "Python",
               "Estadística"
-            ]
+            ],
+            "bullet_en": "Engineered top-down demand forecasting and time series models with advanced feature engineering and cross-validation techniques.",
+            "metric_en": "18% decrease in mean absolute error (MAE) across key enterprise accounts"
           }
-        ]
+        ],
+        "role_en": "Senior Data Scientist",
+        "period_en": "2019 - 2021"
       }
     ]
   },

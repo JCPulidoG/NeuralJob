@@ -115,6 +115,26 @@ El archivo JSON canónico se divide en tres bloques fundamentales:
 
 ---
 
+## 🌐 Generación Bilingüe de CVs (Español & English)
+
+NeuralJob soporta de forma nativa la generación de CVs tanto en **Español** como en **Inglés**:
+
+1. **Campos Bilingües en el JSON Master:**
+   - En `data/cv_master.json`, puedes agregar opcionalmente los campos correspondientes en inglés:
+     - `title_en` y `summary_en` para perfiles objetivo.
+     - `role_en`, `period_en`, `bullet_en` y `metric_en` para cada viñeta y experiencia.
+     - `value_en` para educación y certificaciones.
+     - `Ubicación_en` en la información de contacto.
+   - **Fallback Inteligente:** Si alguna viñeta o campo no tiene traducción definida, el motor utiliza automáticamente la versión en español sin interrumpir la compilación.
+2. **Encabezados y Fechas Adaptadas:**
+   - Al compilar en inglés, los encabezados de sección cambian automáticamente (*"PROFESSIONAL EXPERIENCE"*, *"TECHNICAL SKILLS & COMPETENCIES"*, etc.) y los periodos adaptan términos como `PRESENT`.
+3. **Nomenclatura Automática:**
+   - Al compilar en inglés, los archivos PDF y Markdown se guardan con el sufijo `_EN` (ej. `JOB-0807BA7B_Empresa_EN.pdf`).
+4. **Selector en Dashboard:**
+   - En la pestaña de previsualización de Streamlit, dispones de un selector `🌐 Idioma del CV` para alternar entre Español e Inglés y ver los cambios en tiempo real antes de descargar.
+
+---
+
 ## ⏱️ Rutina Operativa Diaria (Flujo en 20 Minutos)
 
 1. **Minutos 0 - 5: Búsqueda y Captura de Vacantes**

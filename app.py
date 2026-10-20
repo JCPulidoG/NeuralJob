@@ -731,26 +731,46 @@ with tab_generador:
 
         st.divider()
 
+        # Selector de Idioma para el CV
+        col_l1, col_l2 = st.columns([1.5, 2.5])
+        with col_l1:
+            selected_lang = st.radio(
+                "🌐 **Idioma del CV / CV Language:**",
+                options=["es", "en"],
+                format_func=lambda x: "🇪🇸 Español" if x == "es" else "🇺🇸 English (EN)",
+                horizontal=True,
+                key="cv_lang_selector"
+            )
+        with col_l2:
+            if selected_lang == "en":
+                st.caption("ℹ️ *Se compilarán los textos y encabezados en inglés con sufijo `_EN` (usando fallback automático al español si algún logro no tiene traducción).*")
+            else:
+                st.caption("ℹ️ *Versión estándar en español optimizada para filtros ATS locales y regionales.*")
+
         # Previsualización y Compilación
         subtab_preview, subtab_bullets = st.tabs(["👁️ Vista Previa del CV Compilado", "🎯 Detalle de Viñetas Seleccionadas"])
 
         with subtab_preview:
-            # Generar contenido Markdown
-            md_content = generate_markdown(tailored_cv)
+            # Generar contenido Markdown según idioma
+            md_content = generate_markdown(tailored_cv, lang=selected_lang)
             st.markdown(md_content)
 
         with subtab_bullets:
             st.write("A continuación se detallan las viñetas seleccionadas para cada rol según su relevancia algorítmica:")
             for exp in tailored_cv.get("tailored_experiences", []):
-                st.markdown(f"**{exp['role']}** en *{exp['company']}* ({exp['period']})")
+                role_label = exp.get("role_en") if selected_lang == "en" and exp.get("role_en") else exp['role']
+                st.markdown(f"**{role_label}** en *{exp['company']}* ({exp['period']})")
                 for b in exp.get("selected_bullets", []):
                     b_id = b.get("id", "")
-                    b_text = b.get("text", "") or b.get("bullet", "")
-                    b_metric = b.get("metric", "")
+                    b_text = (b.get("bullet_en") or b.get("text_en")) if selected_lang == "en" else (b.get("text", "") or b.get("bullet", ""))
+                    if not b_text:
+                        b_text = b.get("text", "") or b.get("bullet", "")
+                    b_metric = b.get("metric_en") if selected_lang == "en" and b.get("metric_en") else b.get("metric", "")
                     b_kws = ", ".join(b.get("keywords", []))
                     st.markdown(f"- `[{b_id}]` {b_text}")
                     if b_metric:
-                        st.caption(f"&nbsp;&nbsp;&nbsp;&nbsp;🎯 *Métrica:* {b_metric} | 🏷️ *Keywords:* {b_kws}")
+                        impact_tag = "Impact" if selected_lang == "en" else "Métrica"
+                        st.caption(f"&nbsp;&nbsp;&nbsp;&nbsp;🎯 *{impact_tag}:* {b_metric} | 🏷️ *Keywords:* {b_kws}")
                 st.write("")
 
         st.divider()
@@ -759,18 +779,19 @@ with tab_generador:
         c_down1, c_down2, c_down3 = st.columns([1.5, 1, 1])
         
         with c_down1:
-            compile_btn = st.button("🚀 Compilar Paquete Completo (PDF & Markdown)", type="primary", use_container_width=True)
+            compile_label = "🚀 Compilar Paquete Completo (PDF & Markdown)" if selected_lang == "es" else "🚀 Compile Full Package (PDF & Markdown EN)"
+            compile_btn = st.button(compile_label, type="primary", use_container_width=True)
 
         if compile_btn or "compiled_files" in st.session_state:
             if compile_btn:
                 with st.spinner("Compilando documentos en outputs/..."):
-                    compiled = compile_cv_package(tailored_cv, active_lead["id"], active_lead["company"])
+                    compiled = compile_cv_package(tailored_cv, active_lead["id"], active_lead["company"], lang=selected_lang)
                     update_job_status(active_lead["id"], "cv_generado", {
                         "cv_pdf": compiled["pdf_path"],
                         "cv_md": compiled["markdown_path"]
                     })
                     st.session_state["compiled_files"] = compiled
-                    st.success("¡CV compilado exitosamente!")
+                    st.success(f"¡CV compilado exitosamente ({selected_lang.upper()})!")
 
             compiled = st.session_state.get("compiled_files")
             if compiled and os.path.exists(compiled["pdf_path"]) and os.path.exists(compiled["markdown_path"]):

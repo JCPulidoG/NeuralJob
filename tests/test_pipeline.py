@@ -102,14 +102,23 @@ def run_tests():
         assert cached_score == match_quant["ats_score"], "Caché de ATS score en SQLite no coincide"
     print("✅ Caché de ATS Evaluations en SQLite verificado.")
 
-    # 4. Test Compilación PDF & Markdown
-    print("\n--- 4. Probando Compilador PDF y Markdown ---")
-    out_quant = compile_cv_package(match_quant, lead_quant["id"], lead_quant["company"])
-    assert Path(out_quant["pdf_path"]).exists(), "El archivo PDF no fue creado"
-    assert Path(out_quant["markdown_path"]).exists(), "El archivo Markdown no fue creado"
-    print("✅ Documentos generados exitosamente:")
-    print("   - PDF:", out_quant["pdf_path"])
-    print("   - MD:", out_quant["markdown_path"])
+    # 4. Test Compilación PDF & Markdown (Español & Inglés)
+    print("\n--- 4. Probando Compilador PDF y Markdown (Español & Inglés) ---")
+    out_quant = compile_cv_package(match_quant, lead_quant["id"], lead_quant["company"], lang="es")
+    assert Path(out_quant["pdf_path"]).exists(), "El archivo PDF en español no fue creado"
+    assert Path(out_quant["markdown_path"]).exists(), "El archivo Markdown en español no fue creado"
+
+    out_quant_en = compile_cv_package(match_quant, lead_quant["id"], lead_quant["company"], lang="en")
+    assert Path(out_quant_en["pdf_path"]).exists(), "El archivo PDF en inglés no fue creado"
+    assert Path(out_quant_en["markdown_path"]).exists(), "El archivo Markdown en inglés no fue creado"
+    assert "_EN" in out_quant_en["pdf_path"], "El PDF en inglés debe tener sufijo _EN"
+    with open(out_quant_en["markdown_path"], "r", encoding="utf-8") as f_en:
+        en_text = f_en.read()
+        assert "Professional Experience" in en_text or "PROFESSIONAL EXPERIENCE" in en_text, "Cabecera en inglés ausente"
+
+    print("✅ Documentos generados exitosamente en ambos idiomas (ES & EN):")
+    print("   - PDF ES:", out_quant["pdf_path"])
+    print("   - PDF EN:", out_quant_en["pdf_path"])
 
     # 5. Test Historial y Auditoría en SQLite
     print("\n--- 5. Probando Historial y Trazabilidad en SQLite ---")
@@ -217,6 +226,11 @@ def run_tests():
     hist["records"] = {k: v for k, v in hist["records"].items() if k not in test_id_set}
     with open(DATA_DIR / "history.json", "w", encoding="utf-8") as f:
         json.dump(hist, f, ensure_ascii=False, indent=2)
+
+    # Limpiar archivos de CV generados en tests
+    for p in [out_quant["pdf_path"], out_quant["markdown_path"], out_quant_en["pdf_path"], out_quant_en["markdown_path"]]:
+        if Path(p).exists():
+            Path(p).unlink()
 
     print("✅ Base de datos SQLite y archivos JSON limpios de registros de prueba.")
 

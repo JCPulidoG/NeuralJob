@@ -145,11 +145,27 @@ def parse_perfil(rows):
         note = data["note"]
         key_lower = key.lower()
 
-        # Detección de Target Profile
+        # Detección de Target Profile y Summary (soporte bilingüe ES / EN)
+        tp_en_match = re.search(r'target\s+profile\s*(\d+)?.*?\b(en|ingles|inglés)\b', key, re.IGNORECASE)
+        sum_en_match = re.search(r'summary\s+target\s*(\d+)?.*?\b(en|ingles|inglés)\b', key, re.IGNORECASE)
         tp_match = re.search(r'target\s+profile\s*(\d+)?(?:\s*\((.*?)\))?', key, re.IGNORECASE)
         sum_match = re.search(r'summary\s+target\s*(\d+)?(?:\s*\((.*?)\))?', key, re.IGNORECASE)
 
-        if tp_match and not sum_match:
+        if tp_en_match:
+            num = tp_en_match.group(1) or "1"
+            if num not in target_profiles_map:
+                target_profiles_map[num] = {"id": f"target_{num}", "number": num, "tag": "", "title": "", "title_en": val, "summary": "", "note": note}
+            else:
+                target_profiles_map[num]["title_en"] = val
+
+        elif sum_en_match:
+            num = sum_en_match.group(1) or "1"
+            if num not in target_profiles_map:
+                target_profiles_map[num] = {"id": f"target_{num}", "number": num, "tag": "", "title": "", "summary": "", "summary_en": val, "note": note}
+            else:
+                target_profiles_map[num]["summary_en"] = val
+
+        elif tp_match and not sum_match:
             num = tp_match.group(1) or "1"
             tag = tp_match.group(2) or ""
             if num not in target_profiles_map:
@@ -206,9 +222,13 @@ def parse_experiencias(rows):
     idx_id = get_col_idx(["id"])
     idx_empresa = get_col_idx(["empresa", "company"])
     idx_rol = get_col_idx(["rol", "puesto", "title", "role"])
+    idx_rol_en = get_col_idx(["rol_en", "role_en", "puesto (en)", "puesto_en", "role (en)"])
     idx_periodo = get_col_idx(["periodo", "fecha", "date", "period"])
+    idx_periodo_en = get_col_idx(["periodo_en", "period_en", "periodo (en)", "period (en)"])
     idx_vineta = get_col_idx(["viñeta", "vineta", "logro", "bullet", "descrip"])
+    idx_vineta_en = get_col_idx(["viñeta (en)", "vineta (en)", "logro (en)", "bullet_en", "bullet (en)", "viñeta_en", "vineta_en"])
     idx_metrica = get_col_idx(["métrica", "metrica", "impacto", "impact"])
+    idx_metrica_en = get_col_idx(["métrica (en)", "metrica (en)", "impact (en)", "metric_en", "metric (en)"])
     idx_tracks = get_col_idx(["track", "rama", "perfil"])
     idx_keywords = get_col_idx(["keyword", "ats", "palabra"])
 
@@ -227,9 +247,13 @@ def parse_experiencias(rows):
         exp_id = safe_get(idx_id)
         empresa = safe_get(idx_empresa)
         rol = safe_get(idx_rol)
+        rol_en = safe_get(idx_rol_en)
         periodo = safe_get(idx_periodo)
+        periodo_en = safe_get(idx_periodo_en)
         vineta = safe_get(idx_vineta)
+        vineta_en = safe_get(idx_vineta_en)
         metrica = safe_get(idx_metrica)
+        metrica_en = safe_get(idx_metrica_en)
         tracks_raw = safe_get(idx_tracks)
         keywords_raw = safe_get(idx_keywords)
 
@@ -243,9 +267,13 @@ def parse_experiencias(rows):
             "id": exp_id,
             "company": empresa,
             "role": rol,
+            "role_en": rol_en,
             "period": periodo,
+            "period_en": periodo_en,
             "bullet": vineta,
+            "bullet_en": vineta_en,
             "metric": metrica,
+            "metric_en": metrica_en,
             "tracks": tracks,
             "keywords": keywords
         }
@@ -257,14 +285,18 @@ def parse_experiencias(rows):
             grouped_map[group_key] = {
                 "company": empresa,
                 "role": rol,
+                "role_en": rol_en,
                 "period": periodo,
+                "period_en": periodo_en,
                 "bullets": []
             }
         
         grouped_map[group_key]["bullets"].append({
             "id": exp_id,
             "text": vineta,
+            "bullet_en": vineta_en,
             "metric": metrica,
+            "metric_en": metrica_en,
             "tracks": tracks,
             "keywords": keywords
         })
@@ -369,19 +401,25 @@ def load_and_validate_json_master(source_json: Path, output_path: Path = None) -
         for item in experiences.get("items", []):
             empresa = item.get("company", "")
             rol = item.get("role", "")
+            rol_en = item.get("role_en", "")
             periodo = item.get("period", "")
+            periodo_en = item.get("period_en", "")
             group_key = f"{empresa}____{rol}____{periodo}"
             if group_key not in grouped_map:
                 grouped_map[group_key] = {
                     "company": empresa,
                     "role": rol,
+                    "role_en": rol_en,
                     "period": periodo,
+                    "period_en": periodo_en,
                     "bullets": []
                 }
             grouped_map[group_key]["bullets"].append({
                 "id": item.get("id", ""),
                 "text": item.get("bullet", ""),
+                "bullet_en": item.get("bullet_en", ""),
                 "metric": item.get("metric", ""),
+                "metric_en": item.get("metric_en", ""),
                 "tracks": item.get("tracks", []),
                 "keywords": item.get("keywords", [])
             })
