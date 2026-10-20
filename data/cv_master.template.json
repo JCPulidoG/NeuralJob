@@ -1,0 +1,591 @@
+{
+  "source_file": "cv_master.template.json",
+  "version": "1.0.0",
+  "profile": {
+    "raw_fields": {
+      "Nombre Completo": {
+        "value": "Tu Nombre Completo",
+        "note": "Encabezado principal del CV"
+      },
+      "Email": {
+        "value": "tu_email@ejemplo.com",
+        "note": "Correo electrónico de contacto"
+      },
+      "Teléfono": {
+        "value": "+52 55 1234 5678",
+        "note": "Teléfono de contacto con clave de país"
+      },
+      "Ubicación": {
+        "value": "Ciudad de México, México",
+        "note": "Disponibilidad remota / híbrida"
+      },
+      "LinkedIn": {
+        "value": "https://www.linkedin.com/in/tu-perfil",
+        "note": "Perfil profesional en LinkedIn"
+      },
+      "GitHub": {
+        "value": "https://www.github.com/tu-usuario",
+        "note": "Portafolio de código y proyectos"
+      },
+      "Target Profile 1 (Quant)": {
+        "value": "Quantitative Risk Lead | Portfolio & Market Risk Analyst",
+        "note": "Perfil enfocado en riesgo de mercado, modelos estocásticos y quant"
+      },
+      "Summary Target 1": {
+        "value": "Profesional cuantitativo con sólida experiencia en modelado de riesgo financiero (VaR, CVaR), simulaciones de Monte Carlo y análisis de series de tiempo financieras. Experiencia en optimización de portafolios y analítica de datos a gran escala con Python y Databricks.",
+        "note": "Resumen ejecutivo para perfil Cuantitativo"
+      },
+      "Target Profile 2 (Data Arch)": {
+        "value": "Líder Arquitecto de Estrategia de Datos & Big Data",
+        "note": "Perfil enfocado en arquitectura cloud, gobierno y DWH"
+      },
+      "Summary Target 2": {
+        "value": "Líder en arquitectura de datos y cómputo distribuido con amplia experiencia en modernización de ecosistemas analíticos. Especialista en arquitectura Medallion, optimización de pipelines en PySpark/Databricks, gobierno de datos y FinOps.",
+        "note": "Resumen ejecutivo para perfil de Arquitectura de Datos"
+      },
+      "Target Profile 3 (Data Science)": {
+        "value": "Senior Data Scientist | ML & Modelado Estadístico",
+        "note": "Perfil enfocado en Machine Learning, analítica predictiva y estadística"
+      },
+      "Summary Target 3": {
+        "value": "Científico de datos enfocado en aprendizaje automático, modelado predictivo, series de tiempo, segmentación avanzada y despliegue de modelos de alto impacto en producción con Python y LLMs.",
+        "note": "Resumen ejecutivo para perfil de Ciencia de Datos"
+      },
+      "Educación 1": {
+        "value": "Licenciatura en Matemáticas Aplicadas / Ciencias de la Computación",
+        "note": "Universidad Nacional | Graduado con honores"
+      },
+      "Educación 2": {
+        "value": "Especialización en Finanzas Cuantitativas y Ciencia de Datos",
+        "note": "Instituto Tecnológico | 2022"
+      },
+      "Certificación 1": {
+        "value": "Certificación Profesional Cloud Data Engineer / Architect",
+        "note": "Certificación técnica oficial"
+      },
+      "Certificación 2": {
+        "value": "Certificación en Mercados Financieros y Riesgo Bursátil",
+        "note": "Acreditación regulatoria"
+      }
+    },
+    "target_profiles": [
+      {
+        "id": "target_1",
+        "number": "1",
+        "tag": "Quant",
+        "title": "Quantitative Risk Lead | Portfolio & Market Risk Analyst",
+        "summary": "Profesional cuantitativo con sólida experiencia en modelado de riesgo financiero (VaR, CVaR), simulaciones de Monte Carlo y análisis de series de tiempo financieras. Experiencia en optimización de portafolios y analítica de datos a gran escala con Python y Databricks.",
+        "note": "Perfil enfocado en riesgo de mercado, modelos estocásticos y quant"
+      },
+      {
+        "id": "target_2",
+        "number": "2",
+        "tag": "Data Arch",
+        "title": "Líder Arquitecto de Estrategia de Datos & Big Data",
+        "summary": "Líder en arquitectura de datos y cómputo distribuido con amplia experiencia en modernización de ecosistemas analíticos. Especialista en arquitectura Medallion, optimización de pipelines en PySpark/Databricks, gobierno de datos y FinOps.",
+        "note": "Perfil enfocado en arquitectura cloud, gobierno y DWH"
+      },
+      {
+        "id": "target_3",
+        "number": "3",
+        "tag": "Data Science",
+        "title": "Senior Data Scientist | ML & Modelado Estadístico",
+        "summary": "Científico de datos enfocado en aprendizaje automático, modelado predictivo, series de tiempo, segmentación avanzada y despliegue de modelos de alto impacto en producción con Python y LLMs.",
+        "note": "Perfil enfocado en Machine Learning, analítica predictiva y estadística"
+      }
+    ],
+    "contact_info": {
+      "Nombre Completo": "Tu Nombre Completo",
+      "Email": "tu_email@ejemplo.com",
+      "Teléfono": "+52 55 1234 5678",
+      "Ubicación": "Ciudad de México, México",
+      "LinkedIn": "https://www.linkedin.com/in/tu-perfil",
+      "GitHub": "https://www.github.com/tu-usuario"
+    },
+    "education": [
+      {
+        "field": "Educación 1",
+        "value": "Licenciatura en Matemáticas Aplicadas / Ciencias de la Computación",
+        "note": "Universidad Nacional | Graduado con honores"
+      },
+      {
+        "field": "Educación 2",
+        "value": "Especialización en Finanzas Cuantitativas y Ciencia de Datos",
+        "note": "Instituto Tecnológico | 2022"
+      }
+    ],
+    "certifications": [
+      {
+        "field": "Certificación 1",
+        "value": "Certificación Profesional Cloud Data Engineer / Architect",
+        "note": "Certificación técnica oficial"
+      },
+      {
+        "field": "Certificación 2",
+        "value": "Certificación en Mercados Financieros y Riesgo Bursátil",
+        "note": "Acreditación regulatoria"
+      }
+    ],
+    "other_fields": {}
+  },
+  "experiences": {
+    "items": [
+      {
+        "id": "EXP-01",
+        "company": "Fintech Global Corp",
+        "role": "Líder de Arquitectura de Datos y Analítica",
+        "period": "2024 - PRESENTE",
+        "bullet": "Diseño y modelado de motores de analítica y riesgo financiero multi-nube, calculando métricas de Valor en Riesgo (VaR) y Pérdida Esperada (CVaR) mediante simulaciones de Monte Carlo y modelos estocásticos.",
+        "metric": "Optimización de cálculo de riesgo en 45% y reducción de latencia analítica",
+        "tracks": [
+          "quant_risk",
+          "data_scientist",
+          "data_arch"
+        ],
+        "keywords": [
+          "VaR",
+          "CVaR",
+          "Monte Carlo",
+          "Python",
+          "Riesgo de Mercado",
+          "Databricks"
+        ]
+      },
+      {
+        "id": "EXP-02",
+        "company": "Fintech Global Corp",
+        "role": "Líder de Arquitectura de Datos y Analítica",
+        "period": "2024 - PRESENTE",
+        "bullet": "Definición de arquitectura Medallion (Bronze, Silver, Gold) en Delta Lake con PySpark, orquestando pipelines escalables con CI/CD automatizado y monitoreo de calidad de datos.",
+        "metric": "Procesamiento diario de +200 GB con 99.9% de SLA en disponibilidad de datos",
+        "tracks": [
+          "data_arch"
+        ],
+        "keywords": [
+          "Delta Lake",
+          "PySpark",
+          "Databricks",
+          "Arquitectura Medallion",
+          "CI/CD",
+          "FinOps"
+        ]
+      },
+      {
+        "id": "EXP-03",
+        "company": "Fintech Global Corp",
+        "role": "Líder de Arquitectura de Datos y Analítica",
+        "period": "2024 - PRESENTE",
+        "bullet": "Implementación de modelos predictivos y algoritmos de clustering para detección de patrones y scoring de usuarios con pipelines automatizados.",
+        "metric": "Aumento del 25% en precisión predictiva comparado con modelos heurísticos previos",
+        "tracks": [
+          "data_scientist"
+        ],
+        "keywords": [
+          "Machine Learning",
+          "Clustering",
+          "Scoring",
+          "Python",
+          "Modelado Predictivo"
+        ]
+      },
+      {
+        "id": "EXP-04",
+        "company": "Banco & Casa de Bolsa Continental",
+        "role": "Especialista Cuantitativo & Data Architect",
+        "period": "2021 - 2024",
+        "bullet": "Desarrollo y calibración de curvas de descuento, modelos de tasa de interés y stress testing regulatorio para portafolios de inversión institucional.",
+        "metric": "Cumplimiento 100% regulatorio y automatización del informe diario de riesgos",
+        "tracks": [
+          "quant_risk"
+        ],
+        "keywords": [
+          "Stress Testing",
+          "Riesgo Financiero",
+          "Portafolios",
+          "Python",
+          "Modelos Cuantitativos"
+        ]
+      },
+      {
+        "id": "EXP-05",
+        "company": "Banco & Casa de Bolsa Continental",
+        "role": "Especialista Cuantitativo & Data Architect",
+        "period": "2021 - 2024",
+        "bullet": "Migración y refactorización de almacenes de datos tradicionales hacia Data Lake distribuido en la nube, optimizando costos de cómputo y políticas de gobierno.",
+        "metric": "Reducción del 35% en costos cloud mediante gobernanza FinOps",
+        "tracks": [
+          "data_arch"
+        ],
+        "keywords": [
+          "Cloud",
+          "Data Lake",
+          "Gobernanza de Datos",
+          "FinOps",
+          "SQL",
+          "ETL"
+        ]
+      },
+      {
+        "id": "EXP-06",
+        "company": "Tech Analytics Solutions",
+        "role": "Senior Data Scientist",
+        "period": "2019 - 2021",
+        "bullet": "Construcción de modelos de pronóstico de demanda y series de tiempo con metodologías avanzadas, integrando features complejas y validación cruzada.",
+        "metric": "Disminución del error medio absoluto (MAE) en un 18% para clientes clave",
+        "tracks": [
+          "data_scientist"
+        ],
+        "keywords": [
+          "Series de Tiempo",
+          "Forecasting",
+          "Scikit-learn",
+          "Python",
+          "Estadística"
+        ]
+      }
+    ],
+    "grouped": [
+      {
+        "company": "Fintech Global Corp",
+        "role": "Líder de Arquitectura de Datos y Analítica",
+        "period": "2024 - PRESENTE",
+        "bullets": [
+          {
+            "id": "EXP-01",
+            "text": "Diseño y modelado de motores de analítica y riesgo financiero multi-nube, calculando métricas de Valor en Riesgo (VaR) y Pérdida Esperada (CVaR) mediante simulaciones de Monte Carlo y modelos estocásticos.",
+            "metric": "Optimización de cálculo de riesgo en 45% y reducción de latencia analítica",
+            "tracks": [
+              "quant_risk",
+              "data_scientist",
+              "data_arch"
+            ],
+            "keywords": [
+              "VaR",
+              "CVaR",
+              "Monte Carlo",
+              "Python",
+              "Riesgo de Mercado",
+              "Databricks"
+            ]
+          },
+          {
+            "id": "EXP-02",
+            "text": "Definición de arquitectura Medallion (Bronze, Silver, Gold) en Delta Lake con PySpark, orquestando pipelines escalables con CI/CD automatizado y monitoreo de calidad de datos.",
+            "metric": "Procesamiento diario de +200 GB con 99.9% de SLA en disponibilidad de datos",
+            "tracks": [
+              "data_arch"
+            ],
+            "keywords": [
+              "Delta Lake",
+              "PySpark",
+              "Databricks",
+              "Arquitectura Medallion",
+              "CI/CD",
+              "FinOps"
+            ]
+          },
+          {
+            "id": "EXP-03",
+            "text": "Implementación de modelos predictivos y algoritmos de clustering para detección de patrones y scoring de usuarios con pipelines automatizados.",
+            "metric": "Aumento del 25% en precisión predictiva comparado con modelos heurísticos previos",
+            "tracks": [
+              "data_scientist"
+            ],
+            "keywords": [
+              "Machine Learning",
+              "Clustering",
+              "Scoring",
+              "Python",
+              "Modelado Predictivo"
+            ]
+          }
+        ]
+      },
+      {
+        "company": "Banco & Casa de Bolsa Continental",
+        "role": "Especialista Cuantitativo & Data Architect",
+        "period": "2021 - 2024",
+        "bullets": [
+          {
+            "id": "EXP-04",
+            "text": "Desarrollo y calibración de curvas de descuento, modelos de tasa de interés y stress testing regulatorio para portafolios de inversión institucional.",
+            "metric": "Cumplimiento 100% regulatorio y automatización del informe diario de riesgos",
+            "tracks": [
+              "quant_risk"
+            ],
+            "keywords": [
+              "Stress Testing",
+              "Riesgo Financiero",
+              "Portafolios",
+              "Python",
+              "Modelos Cuantitativos"
+            ]
+          },
+          {
+            "id": "EXP-05",
+            "text": "Migración y refactorización de almacenes de datos tradicionales hacia Data Lake distribuido en la nube, optimizando costos de cómputo y políticas de gobierno.",
+            "metric": "Reducción del 35% en costos cloud mediante gobernanza FinOps",
+            "tracks": [
+              "data_arch"
+            ],
+            "keywords": [
+              "Cloud",
+              "Data Lake",
+              "Gobernanza de Datos",
+              "FinOps",
+              "SQL",
+              "ETL"
+            ]
+          }
+        ]
+      },
+      {
+        "company": "Tech Analytics Solutions",
+        "role": "Senior Data Scientist",
+        "period": "2019 - 2021",
+        "bullets": [
+          {
+            "id": "EXP-06",
+            "text": "Construcción de modelos de pronóstico de demanda y series de tiempo con metodologías avanzadas, integrando features complejas y validación cruzada.",
+            "metric": "Disminución del error medio absoluto (MAE) en un 18% para clientes clave",
+            "tracks": [
+              "data_scientist"
+            ],
+            "keywords": [
+              "Series de Tiempo",
+              "Forecasting",
+              "Scikit-learn",
+              "Python",
+              "Estadística"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "items": [
+      {
+        "category": "Métodos Cuantitativos & Finanzas",
+        "skill": "VaR (Value at Risk) & CVaR (Expected Shortfall)",
+        "level": "Experto",
+        "tags": [
+          "quant_risk",
+          "finanzas"
+        ]
+      },
+      {
+        "category": "Métodos Cuantitativos & Finanzas",
+        "skill": "Simulaciones de Monte Carlo & Modelado Estocástico",
+        "level": "Experto",
+        "tags": [
+          "quant_risk",
+          "estadistica"
+        ]
+      },
+      {
+        "category": "Métodos Cuantitativos & Finanzas",
+        "skill": "Optimización de Portafolios & Stress Testing",
+        "level": "Avanzado",
+        "tags": [
+          "quant_risk",
+          "portafolios"
+        ]
+      },
+      {
+        "category": "Arquitectura de Datos & Cloud",
+        "skill": "Apache Spark / PySpark & Databricks",
+        "level": "Experto",
+        "tags": [
+          "data_arch",
+          "bigdata"
+        ]
+      },
+      {
+        "category": "Arquitectura de Datos & Cloud",
+        "skill": "Arquitectura Medallion & Delta Lake",
+        "level": "Experto",
+        "tags": [
+          "data_arch",
+          "cloud"
+        ]
+      },
+      {
+        "category": "Arquitectura de Datos & Cloud",
+        "skill": "Diseño de Pipelines ETL/ELT & Orquestación",
+        "level": "Avanzado",
+        "tags": [
+          "data_arch",
+          "data_engineering"
+        ]
+      },
+      {
+        "category": "Arquitectura de Datos & Cloud",
+        "skill": "Cloud Data Platforms (AWS / GCP / Azure)",
+        "level": "Avanzado",
+        "tags": [
+          "data_arch",
+          "cloud"
+        ]
+      },
+      {
+        "category": "Machine Learning & Analítica",
+        "skill": "Python (NumPy, Pandas, Scikit-Learn)",
+        "level": "Experto",
+        "tags": [
+          "data_scientist",
+          "python"
+        ]
+      },
+      {
+        "category": "Machine Learning & Analítica",
+        "skill": "Series de Tiempo & Modelos Predictivos",
+        "level": "Experto",
+        "tags": [
+          "data_scientist",
+          "estadistica"
+        ]
+      },
+      {
+        "category": "Machine Learning & Analítica",
+        "skill": "Clustering, Segmentación & Algoritmos Supervisados",
+        "level": "Avanzado",
+        "tags": [
+          "data_scientist",
+          "ml"
+        ]
+      },
+      {
+        "category": "Machine Learning & Analítica",
+        "skill": "Modelos de Lenguaje (LLMs) & Prompt Engineering",
+        "level": "Avanzado",
+        "tags": [
+          "data_scientist",
+          "ia"
+        ]
+      },
+      {
+        "category": "Visualización & BI",
+        "skill": "Dashboards Interactivos (Streamlit, PowerBI)",
+        "level": "Avanzado",
+        "tags": [
+          "bi",
+          "visualizacion"
+        ]
+      }
+    ],
+    "categories": {
+      "Métodos Cuantitativos & Finanzas": [
+        {
+          "skill": "VaR (Value at Risk) & CVaR (Expected Shortfall)",
+          "level": "Experto",
+          "tags": [
+            "quant_risk",
+            "finanzas"
+          ]
+        },
+        {
+          "skill": "Simulaciones de Monte Carlo & Modelado Estocástico",
+          "level": "Experto",
+          "tags": [
+            "quant_risk",
+            "estadistica"
+          ]
+        },
+        {
+          "skill": "Optimización de Portafolios & Stress Testing",
+          "level": "Avanzado",
+          "tags": [
+            "quant_risk",
+            "portafolios"
+          ]
+        }
+      ],
+      "Arquitectura de Datos & Cloud": [
+        {
+          "skill": "Apache Spark / PySpark & Databricks",
+          "level": "Experto",
+          "tags": [
+            "data_arch",
+            "bigdata"
+          ]
+        },
+        {
+          "skill": "Arquitectura Medallion & Delta Lake",
+          "level": "Experto",
+          "tags": [
+            "data_arch",
+            "cloud"
+          ]
+        },
+        {
+          "skill": "Diseño de Pipelines ETL/ELT & Orquestación",
+          "level": "Avanzado",
+          "tags": [
+            "data_arch",
+            "data_engineering"
+          ]
+        },
+        {
+          "skill": "Cloud Data Platforms (AWS / GCP / Azure)",
+          "level": "Avanzado",
+          "tags": [
+            "data_arch",
+            "cloud"
+          ]
+        }
+      ],
+      "Machine Learning & Analítica": [
+        {
+          "skill": "Python (NumPy, Pandas, Scikit-Learn)",
+          "level": "Experto",
+          "tags": [
+            "data_scientist",
+            "python"
+          ]
+        },
+        {
+          "skill": "Series de Tiempo & Modelos Predictivos",
+          "level": "Experto",
+          "tags": [
+            "data_scientist",
+            "estadistica"
+          ]
+        },
+        {
+          "skill": "Clustering, Segmentación & Algoritmos Supervisados",
+          "level": "Avanzado",
+          "tags": [
+            "data_scientist",
+            "ml"
+          ]
+        },
+        {
+          "skill": "Modelos de Lenguaje (LLMs) & Prompt Engineering",
+          "level": "Avanzado",
+          "tags": [
+            "data_scientist",
+            "ia"
+          ]
+        }
+      ],
+      "Visualización & BI": [
+        {
+          "skill": "Dashboards Interactivos (Streamlit, PowerBI)",
+          "level": "Avanzado",
+          "tags": [
+            "bi",
+            "visualizacion"
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "total_target_profiles": 3,
+    "total_achievements": 6,
+    "total_job_roles": 3,
+    "total_skills": 12,
+    "total_categories": 4
+  }
+}

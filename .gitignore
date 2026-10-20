@@ -1,0 +1,53 @@
+# Entornos virtuales Python
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Bytecode y cachés de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Configuraciones de IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fuente Excel original (para no subir archivos personales .xlsx)
+*.xlsx
+*.xls
+~$*
+data/*.xlsx
+data/*.xls
+
+# Perfil canónico local y respaldos personales (Privacidad de CV)
+data/cv_master.json
+data/cv_master.personal.json
+data/*.personal.*
+data/*.backup*
+data/*.bak
+
+# Salidas de CV compilados (PDF y Markdown personales)
+outputs/*
+!outputs/.gitkeep
+outputs/.backup_cvs/
+
+# Archivos temporales de SQLite
+*.db-journal
+*.db-wal
+*.db-shm
