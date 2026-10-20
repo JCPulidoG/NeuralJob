@@ -27,7 +27,8 @@ from db import (
 )
 from matcher import match_and_tailor_cv, load_history, update_job_status
 from scraper import add_manual_lead, load_job_leads
-from pdf_engine import compile_cv_package
+from pdf_engine import compile_cv_package, compile_english_cv
+from translator import translate_text, translate_cv_data
 
 
 def run_tests():
@@ -102,13 +103,14 @@ def run_tests():
         assert cached_score == match_quant["ats_score"], "Caché de ATS score en SQLite no coincide"
     print("✅ Caché de ATS Evaluations en SQLite verificado.")
 
-    # 4. Test Compilación PDF & Markdown (Español & Inglés)
-    print("\n--- 4. Probando Compilador PDF y Markdown (Español & Inglés) ---")
+    # 4. Test Compilación PDF & Markdown (Español & Inglés con Auto-Traducción)
+    print("\n--- 4. Probando Compilador PDF y Markdown (Español & Auto-Traducción Inglés) ---")
     out_quant = compile_cv_package(match_quant, lead_quant["id"], lead_quant["company"], lang="es")
     assert Path(out_quant["pdf_path"]).exists(), "El archivo PDF en español no fue creado"
     assert Path(out_quant["markdown_path"]).exists(), "El archivo Markdown en español no fue creado"
 
-    out_quant_en = compile_cv_package(match_quant, lead_quant["id"], lead_quant["company"], lang="en")
+    # Prueba de auto-traducción y compilación directa con compile_english_cv
+    out_quant_en = compile_english_cv(match_quant, lead_quant["id"], lead_quant["company"])
     assert Path(out_quant_en["pdf_path"]).exists(), "El archivo PDF en inglés no fue creado"
     assert Path(out_quant_en["markdown_path"]).exists(), "El archivo Markdown en inglés no fue creado"
     assert "_EN" in out_quant_en["pdf_path"], "El PDF en inglés debe tener sufijo _EN"
@@ -116,9 +118,9 @@ def run_tests():
         en_text = f_en.read()
         assert "Professional Experience" in en_text or "PROFESSIONAL EXPERIENCE" in en_text, "Cabecera en inglés ausente"
 
-    print("✅ Documentos generados exitosamente en ambos idiomas (ES & EN):")
+    print("✅ Documentos generados exitosamente en ambos idiomas con auto-traducción:")
     print("   - PDF ES:", out_quant["pdf_path"])
-    print("   - PDF EN:", out_quant_en["pdf_path"])
+    print("   - PDF EN (Auto-traducido):", out_quant_en["pdf_path"])
 
     # 5. Test Historial y Auditoría en SQLite
     print("\n--- 5. Probando Historial y Trazabilidad en SQLite ---")

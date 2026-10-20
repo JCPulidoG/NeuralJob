@@ -127,12 +127,25 @@ def format_period_localized(period: str, period_en: Optional[str] = None, lang: 
     return period or ""
 
 
-def generate_markdown(cv_data: Dict[str, Any], output_path: Optional[Path] = None, lang: str = "es") -> str:
+def generate_markdown(
+    cv_data: Dict[str, Any],
+    output_path: Optional[Path] = None,
+    lang: str = "es",
+    auto_translate: bool = False
+) -> str:
     """
     Genera la versión en Markdown estructurado del CV tailoreado.
     Soporta idiomas 'es' (Español) y 'en' (Inglés).
+    Si auto_translate=True y lang='en', traduce automáticamente los campos al inglés.
     """
     lang = lang.lower() if lang in ["es", "en"] else "es"
+    if lang == "en" and auto_translate:
+        try:
+            from translator import translate_cv_data
+            cv_data = translate_cv_data(cv_data, target_lang="en")
+        except Exception:
+            pass
+
     headers = SECTION_HEADERS.get(lang, SECTION_HEADERS["es"])
 
     contact_info = cv_data.get("contact_info", {})
@@ -540,13 +553,28 @@ def generate_pdf(cv_data: Dict[str, Any], output_path: Path, lang: str = "es") -
     return output_path
 
 
-def compile_cv_package(cv_data: Dict[str, Any], job_id: str, company: str, lang: str = "es") -> Dict[str, str]:
+def compile_cv_package(
+    cv_data: Dict[str, Any],
+    job_id: str,
+    company: str,
+    lang: str = "es",
+    auto_translate: bool = True
+) -> Dict[str, str]:
     """
     Genera tanto el archivo Markdown como el archivo PDF en el directorio outputs/
     Soporta los idiomas 'es' (Español) y 'en' (Inglés).
     Para 'en' agrega el sufijo '_EN' al nombre del archivo.
+    Si auto_translate=True y lang='en', traduce automáticamente de ESP a ENG.
     """
     lang = lang.lower() if lang in ["es", "en"] else "es"
+
+    if lang == "en" and auto_translate:
+        try:
+            from translator import translate_cv_data
+            cv_data = translate_cv_data(cv_data, target_lang="en")
+        except Exception as e:
+            print(f"⚠️ Traductor automático no disponible ({e}), utilizando fallback.")
+
     clean_id = sanitize_filename(job_id)
     clean_comp = sanitize_filename(company)
     base_name = f"{clean_id}_{clean_comp}" if clean_comp else clean_id
@@ -565,6 +593,14 @@ def compile_cv_package(cv_data: Dict[str, Any], job_id: str, company: str, lang:
         "base_name": base_name,
         "lang": lang
     }
+
+
+def compile_english_cv(cv_data: Dict[str, Any], job_id: str, company: str) -> Dict[str, str]:
+    """
+    Función de acceso directo para traducir automáticamente el CV de ESP a ENG
+    y compilar tanto el PDF como el Markdown en outputs/ con sufijo _EN.
+    """
+    return compile_cv_package(cv_data, job_id, company, lang="en", auto_translate=True)
 
 
 if __name__ == "__main__":

@@ -38,6 +38,7 @@ data/*.xls
 # Perfil canónico local y respaldos personales (Privacidad de CV)
 data/cv_master.json
 data/cv_master.personal.json
+data/translation_cache.json
 data/*.personal.*
 data/*.backup*
 data/*.bak

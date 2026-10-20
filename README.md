@@ -39,7 +39,8 @@ neural-job/
 │   ├── matcher.py                  # Algoritmo de scoring semántico ATS y selector de viñetas de impacto
 │   ├── pdf_engine.py               # Generador de alta fidelidad Markdown & PDF (ReportLab)
 │   ├── salary_estimator.py         # Estimador salarial heurístico y detector de sobrecalificación
-│   └── scraper.py                  # Extractor multicanal de vacantes (JobSpy + CompuTrabajo + OCC)
+│   ├── scraper.py                  # Extractor multicanal de vacantes (JobSpy + CompuTrabajo + OCC)
+│   └── translator.py               # Motor de auto-traducción ESP ➔ ENG con caché y preservación técnica
 └── tests/
     └── test_pipeline.py            # Suite de pruebas automatizadas end-to-end
 ```
@@ -115,23 +116,33 @@ El archivo JSON canónico se divide en tres bloques fundamentales:
 
 ---
 
-## 🌐 Generación Bilingüe de CVs (Español & English)
+## 🌐 Generación Bilingüe y Traducción Automática (Español ➔ English)
 
-NeuralJob soporta de forma nativa la generación de CVs tanto en **Español** como en **Inglés**:
+NeuralJob integra un motor de traducción automática y soporte bilingüe nativo:
 
-1. **Campos Bilingües en el JSON Master:**
-   - En `data/cv_master.json`, puedes agregar opcionalmente los campos correspondientes en inglés:
-     - `title_en` y `summary_en` para perfiles objetivo.
-     - `role_en`, `period_en`, `bullet_en` y `metric_en` para cada viñeta y experiencia.
-     - `value_en` para educación y certificaciones.
-     - `Ubicación_en` en la información de contacto.
-   - **Fallback Inteligente:** Si alguna viñeta o campo no tiene traducción definida, el motor utiliza automáticamente la versión en español sin interrumpir la compilación.
-2. **Encabezados y Fechas Adaptadas:**
-   - Al compilar en inglés, los encabezados de sección cambian automáticamente (*"PROFESSIONAL EXPERIENCE"*, *"TECHNICAL SKILLS & COMPETENCIES"*, etc.) y los periodos adaptan términos como `PRESENT`.
-3. **Nomenclatura Automática:**
-   - Al compilar en inglés, los archivos PDF y Markdown se guardan con el sufijo `_EN` (ej. `JOB-0807BA7B_Empresa_EN.pdf`).
-4. **Selector en Dashboard:**
-   - En la pestaña de previsualización de Streamlit, dispones de un selector `🌐 Idioma del CV` para alternar entre Español e Inglés y ver los cambios en tiempo real antes de descargar.
+1. **Auto-Traducción Inteligente al Vuelo:**
+   - Si tu perfil o vacantes están en español y necesitas postular en inglés, el motor (`src/translator.py`) traduce automáticamente tus títulos, resúmenes, viñetas de logros, métricas y habilidades técnicas en tiempo real sin requerir API keys de pago.
+   - **Preservación Técnica:** Acrónimos y términos especializados como *VaR, CVaR, PySpark, Databricks, Monte Carlo, FinOps, CONSAR, LLMs, Scikit-Learn* se conservan intactos con su nomenclatura técnica oficial.
+   - **Caché Persistente:** Las traducciones se cachean localmente para que las consultas subsecuentes sean instantáneas (0 ms).
+2. **Función Directa de Compilación en Python:**
+   ```python
+   from pdf_engine import compile_english_cv
+   
+   # Traduce de ESP a ENG y genera el paquete completo en outputs/ con sufijo _EN
+   resultado = compile_english_cv(tailored_cv, job_id="JOB-001", company="Banorte")
+   print(resultado["pdf_path"])       # outputs/JOB-001_Banorte_EN.pdf
+   print(resultado["markdown_path"])  # outputs/JOB-001_Banorte_EN.md
+   ```
+3. **Auto-Traducción Completa del Archivo JSON:**
+   Puedes traducir todo tu archivo JSON de una sola vez ejecutando:
+   ```bash
+   python3 src/translator.py data/cv_master.json data/cv_master.json
+   ```
+   O bien, hacer clic en el botón de la barra lateral de Streamlit:  
+   👉 **`🌐 Auto-Traducir Perfil (ESP ➔ ENG)`**
+4. **Selector en Dashboard y Compilación con un Clic:**
+   - En el dashboard de Streamlit, selecciona **`🇺🇸 English (EN)`** para previsualizar el CV traducido.
+   - Presiona **`🌐 Compilar CV en Inglés (Auto-Traducir a PDF & MD)`** para generar ambos documentos listos para enviar a vacantes internacionales.
 
 ---
 

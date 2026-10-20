@@ -243,6 +243,18 @@ with st.sidebar:
             st.success("cv_master.json sincronizado correctamente!")
             st.rerun()
 
+    if st.button("🌐 Auto-Traducir Perfil (ESP ➔ ENG)", use_container_width=True, help="Traduce automáticamente los campos de tu perfil al inglés"):
+        with st.spinner("Traduciendo perfil completo al inglés..."):
+            try:
+                from translator import translate_json_master
+                target_file = json_file if json_file.exists() else template_file
+                translate_json_master(target_file, json_file)
+                get_current_master(force_rebuild=True)
+                st.success("¡Perfil traducido al inglés y guardado en JSON!")
+                st.rerun()
+            except Exception as ex:
+                st.error(f"Error al traducir: {ex}")
+
     meta = master_data.get("metadata", {})
     col_m1, col_m2 = st.columns(2)
     with col_m1:
@@ -751,8 +763,8 @@ with tab_generador:
         subtab_preview, subtab_bullets = st.tabs(["👁️ Vista Previa del CV Compilado", "🎯 Detalle de Viñetas Seleccionadas"])
 
         with subtab_preview:
-            # Generar contenido Markdown según idioma
-            md_content = generate_markdown(tailored_cv, lang=selected_lang)
+            # Generar contenido Markdown según idioma con auto-traducción si se solicita EN
+            md_content = generate_markdown(tailored_cv, lang=selected_lang, auto_translate=(selected_lang == "en"))
             st.markdown(md_content)
 
         with subtab_bullets:
@@ -779,13 +791,20 @@ with tab_generador:
         c_down1, c_down2, c_down3 = st.columns([1.5, 1, 1])
         
         with c_down1:
-            compile_label = "🚀 Compilar Paquete Completo (PDF & Markdown)" if selected_lang == "es" else "🚀 Compile Full Package (PDF & Markdown EN)"
+            compile_label = "🚀 Compilar Paquete Completo (PDF & Markdown)" if selected_lang == "es" else "🌐 Compilar CV en Inglés (Auto-Traducir a PDF & MD)"
             compile_btn = st.button(compile_label, type="primary", use_container_width=True)
 
         if compile_btn or "compiled_files" in st.session_state:
             if compile_btn:
-                with st.spinner("Compilando documentos en outputs/..."):
-                    compiled = compile_cv_package(tailored_cv, active_lead["id"], active_lead["company"], lang=selected_lang)
+                spinner_text = "Compilando documentos en outputs/..." if selected_lang == "es" else "Traduciendo automáticamente al inglés y compilando documentos..."
+                with st.spinner(spinner_text):
+                    compiled = compile_cv_package(
+                        tailored_cv,
+                        active_lead["id"],
+                        active_lead["company"],
+                        lang=selected_lang,
+                        auto_translate=(selected_lang == "en")
+                    )
                     update_job_status(active_lead["id"], "cv_generado", {
                         "cv_pdf": compiled["pdf_path"],
                         "cv_md": compiled["markdown_path"]
