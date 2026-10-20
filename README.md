@@ -116,33 +116,98 @@ El archivo JSON canónico se divide en tres bloques fundamentales:
 
 ---
 
+---
+
 ## 🌐 Generación Bilingüe y Traducción Automática (Español ➔ English)
 
-NeuralJob integra un motor de traducción automática y soporte bilingüe nativo:
+NeuralJob cuenta con un motor nativo de **traducción automática inteligente y compilación directa** diseñado para postular a vacantes internacionales y remotas sin necesidad de redactar manualmente tu CV en dos idiomas.
 
-1. **Auto-Traducción Inteligente al Vuelo:**
-   - Si tu perfil o vacantes están en español y necesitas postular en inglés, el motor (`src/translator.py`) traduce automáticamente tus títulos, resúmenes, viñetas de logros, métricas y habilidades técnicas en tiempo real sin requerir API keys de pago.
-   - **Preservación Técnica:** Acrónimos y términos especializados como *VaR, CVaR, PySpark, Databricks, Monte Carlo, FinOps, CONSAR, LLMs, Scikit-Learn* se conservan intactos con su nomenclatura técnica oficial.
-   - **Caché Persistente:** Las traducciones se cachean localmente para que las consultas subsecuentes sean instantáneas (0 ms).
-2. **Función Directa de Compilación en Python:**
-   ```python
-   from pdf_engine import compile_english_cv
-   
-   # Traduce de ESP a ENG y genera el paquete completo en outputs/ con sufijo _EN
-   resultado = compile_english_cv(tailored_cv, job_id="JOB-001", company="Banorte")
-   print(resultado["pdf_path"])       # outputs/JOB-001_Banorte_EN.pdf
-   print(resultado["markdown_path"])  # outputs/JOB-001_Banorte_EN.md
-   ```
-3. **Auto-Traducción Completa del Archivo JSON:**
-   Puedes traducir todo tu archivo JSON de una sola vez ejecutando:
-   ```bash
-   python3 src/translator.py data/cv_master.json data/cv_master.json
-   ```
-   O bien, hacer clic en el botón de la barra lateral de Streamlit:  
-   👉 **`🌐 Auto-Traducir Perfil (ESP ➔ ENG)`**
-4. **Selector en Dashboard y Compilación con un Clic:**
-   - En el dashboard de Streamlit, selecciona **`🇺🇸 English (EN)`** para previsualizar el CV traducido.
-   - Presiona **`🌐 Compilar CV en Inglés (Auto-Traducir a PDF & MD)`** para generar ambos documentos listos para enviar a vacantes internacionales.
+```text
+┌─────────────────────────┐       ┌────────────────────────┐       ┌──────────────────────────┐
+│  data/cv_master.json    │  ───> │   src/translator.py    │  ───> │  outputs/JOB-01_Banorte  │
+│  (Perfil en Español)    │       │   (Auto-Traducción EN) │       │  _EN.pdf & _EN.md        │
+└─────────────────────────┘       └────────────────────────┘       └──────────────────────────┘
+```
+
+### ✨ Características del Motor de Traducción
+
+1. **Cero Dependencias de Pago (Sin API Keys):**
+   - Funciona de forma 100% gratuita y sin necesidad de configurar cuentas de OpenAI, Google Cloud o tarjetas de crédito.
+2. **Preservación de Terminología Técnica & Acrónimos ATS:**
+   - Los términos especializados de finanzas cuantitativas, computación distribuida y analítica avanzada no se deforman ni traducen literalmente.
+   - Términos como *VaR, CVaR, Monte Carlo, PySpark, Databricks, Delta Lake, Medallion Architecture, FinOps, CONSAR, AMIB, LLMs, Scikit-Learn, K-Means* conservan su nomenclatura técnica oficial.
+3. **Caché Persistente en Disco (`data/translation_cache.json`):**
+   - Cada viñeta, logro o resumen traducido se almacena localmente. La primera traducción toma ~1 segundo y las siguientes toman **0 ms (instantáneas)**.
+4. **Adaptación de Fechas y Nomenclatura:**
+   - Traduce automáticamente términos temporales como `JUL/2025 - ACT` o `PRESENTE` a `JUL/2025 - PRESENT`.
+   - Adapta métricas: `[Impacto: ...]` ➔ `[Impact: ...]`.
+
+---
+
+### 🖥️ Modo 1: Desde el Dashboard Interactivo (Streamlit)
+
+1. Abre el dashboard (`streamlit run app.py`) y selecciona cualquier vacante de tu lista.
+2. En la pestaña **Compilación y Previsualización**, localiza el selector:
+   - Alterna de **`🇪🇸 Español`** a **`🇺🇸 English (EN)`**.
+3. **Previsualización en Tiempo Real:** La pestaña *"👁️ Vista Previa del CV Compilado"* mostrará de inmediato la versión traducida al inglés.
+4. **Compilación Directa:**
+   - Haz clic en el botón principal:  
+     👉 **`🌐 Compilar CV en Inglés (Auto-Traducir a PDF & MD)`**
+   - En segundos, se generarán en la carpeta `outputs/` los archivos:
+     - `outputs/JOB-XXXX_Empresa_EN.pdf`
+     - `outputs/JOB-XXXX_Empresa_EN.md`
+   - Los botones de descarga se habilitarán automáticamente para guardar ambos archivos en tu equipo.
+
+---
+
+### 💻 Modo 2: En Código Python (Pipeline Automatizado)
+
+Puedes invocar la compilación automática en inglés directamente desde tus propios scripts:
+
+```python
+from matcher import match_and_tailor_cv
+from pdf_engine import compile_english_cv
+
+# 1. Ajustar el CV a la vacante
+tailored_cv = match_and_tailor_cv(
+    job_title="Lead Data Architect",
+    job_description="Looking for expertise in PySpark, Databricks, and Medallion architecture...",
+    company="Fintech Corp"
+)
+
+# 2. Traducir automáticamente y compilar en un solo paso (PDF + Markdown con sufijo _EN)
+resultado = compile_english_cv(tailored_cv, job_id="JOB-101", company="Fintech Corp")
+
+print("PDF generado:", resultado["pdf_path"])       # outputs/JOB-101_Fintech_Corp_EN.pdf
+print("MD generado:", resultado["markdown_path"])  # outputs/JOB-101_Fintech_Corp_EN.md
+```
+
+---
+
+### 📂 Modo 3: Auto-Traducir todo el archivo JSON Master
+
+Si prefieres tener tu archivo `cv_master.json` pre-traducido con todos los campos `_en` guardados permanentemente:
+
+- **Por consola / terminal:**
+  ```bash
+  python3 src/translator.py data/cv_master.json data/cv_master.json
+  ```
+- **Desde la interfaz web:**
+  En la barra lateral de Streamlit, dentro de la sección *"📁 Fuente Única de Verdad"*, haz clic en:  
+  👉 **`🌐 Auto-Traducir Perfil (ESP ➔ ENG)`**
+
+---
+
+### 📑 Comparativa de Secciones Traducidas
+
+| Sección del CV | Encabezado en Español | Encabezado en Inglés (`lang="en"`) |
+| :--- | :--- | :--- |
+| **Resumen Ejecutivo** | `RESUMEN PROFESIONAL` | `PROFESSIONAL SUMMARY` |
+| **Experiencia Laboral** | `EXPERIENCIA PROFESIONAL` | `PROFESSIONAL EXPERIENCE` |
+| **Competencias Técnicas** | `HABILIDADES & COMPETENCIAS TÉCNICAS` | `TECHNICAL SKILLS & COMPETENCIES` |
+| **Formación Académica** | `EDUCACIÓN & CERTIFICACIONES` | `EDUCATION & CERTIFICATIONS` |
+| **Etiqueta de Logro** | `(Impacto: +45% optimización...)` | `(Impact: +45% optimization...)` |
+| **Rango de Fechas** | `2024 - PRESENTE` / `ACT` | `2024 - PRESENT` |
 
 ---
 
